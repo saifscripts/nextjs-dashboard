@@ -5,7 +5,6 @@ import {
   InvoiceForm,
   InvoicesTable,
   LatestInvoiceRaw,
-  Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
 
@@ -14,14 +13,63 @@ export async function fetchRevenue() {
     // Artificially delay a response for demo purposes.
     // Don't do this in production :)
 
-    // console.log('Fetching revenue data...');
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    const data = await sql<Revenue>`SELECT * FROM revenue`;
+    // const data = await sql<Revenue>`SELECT * FROM revenue`;
 
-    // console.log('Data fetch completed after 3 seconds.');
+    console.log('Data fetch completed after 3 seconds.');
 
-    return data.rows;
+    return [
+      {
+        month: 'Jan',
+        revenue: 2000,
+      },
+      {
+        month: 'Feb',
+        revenue: 1800,
+      },
+      {
+        month: 'Mar',
+        revenue: 2200,
+      },
+      {
+        month: 'Apr',
+        revenue: 2500,
+      },
+      {
+        month: 'May',
+        revenue: 2300,
+      },
+      {
+        month: 'Jun',
+        revenue: 3200,
+      },
+      {
+        month: 'Jul',
+        revenue: 3500,
+      },
+      {
+        month: 'Aug',
+        revenue: 3700,
+      },
+      {
+        month: 'Sep',
+        revenue: 2500,
+      },
+      {
+        month: 'Oct',
+        revenue: 2800,
+      },
+      {
+        month: 'Nov',
+        revenue: 3000,
+      },
+      {
+        month: 'Dec',
+        revenue: 4800,
+      },
+    ];
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch revenue data.');
@@ -86,7 +134,7 @@ export async function fetchCardData() {
 const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(
   query: string,
-  currentPage: number,
+  currentPage: number
 ) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
